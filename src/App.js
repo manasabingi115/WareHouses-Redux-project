@@ -4,19 +4,48 @@ import Data from "./Data";
 import Filter from "./Filter";
 
 export default function App() {
-  const [selectCity, setSelectCity] = React.useState("Mumbai");
+  const [selectedCity, setSelectedCity] = React.useState("");
+  const [selectedCluster, setSelectedCluster] = React.useState("");
+  const [selectedSpaceAvailable, setSelectedSpaceAvailable] = React.useState(
+    ""
+  );
 
-  // console.log(Data);
+  let filteredData = [...Data];
+  if (selectedCity) {
+    filteredData = filteredData.filter((data) => data.city === selectedCity);
+  }
+  if (selectedCluster) {
+    filteredData = filteredData.filter(
+      (data) => data.cluster === selectedCluster
+    );
+  }
+  if (selectedSpaceAvailable) {
+    filteredData = filteredData.filter(
+      (data) => data.space_available === selectedSpaceAvailable
+    );
+  }
+
+  console.log(filteredData);
+  function RenderData() {
+    return (
+      <div>
+        {filteredData.map((data) => (
+          <p key={data.id}>{data.name}</p>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="App">
       <h1>Warehouses</h1>
       <br />
-      <Filter selectCity={selectCity} setSelectCity={setSelectCity} />
-      {/* {{ selectCity } === Data.city ? <p>hi</p> : <p>hello</p>} */}
-      {Data.map((data) => (
-        <p key={data.id}>{data.name}</p>
-      ))}
+      <Filter
+        setSelectedCity={setSelectedCity}
+        setSelectedCluster={setSelectedCluster}
+        setSelectedSpaceAvailable={setSelectedSpaceAvailable}
+      />
+      {filteredData ? <RenderData /> : <p>empty</p>}
     </div>
   );
 }
