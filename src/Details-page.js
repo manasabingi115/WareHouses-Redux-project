@@ -38,17 +38,25 @@ export default function DetailsPage({
   };
 
   return (
-    <div>
+    <div className="details-container">
       <form onSubmit={onSubmit}>
-        <input onChange={HandleChangeName} value={editedDetails.name}></input>
+        <label>Name: </label>
+        <input
+          className="edit-input"
+          onChange={HandleChangeName}
+          value={editedDetails.name}
+        ></input>
         <br />
+        <label>City: </label>
         <input onChange={HandleChangeCity} value={editedDetails.city}></input>
         <br />
+        <label>Cluster: </label>
         <input
           onChange={HandleChangeCluster}
           value={editedDetails.cluster}
         ></input>
         <br />
+        <label>Live status: </label>
         <input
           onChange={HandleChangeLiveStatus}
           value={editedDetails.is_live}
