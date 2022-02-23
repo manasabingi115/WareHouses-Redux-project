@@ -21,6 +21,7 @@ export default function Filter({
   //   ...new Set(Data.map((el) => el.space_available))
   // ];
   // console.log(UniqueSpaceAvailable);
+
   return (
     <div>
       <select name="city" onChange={onSelectChangeCity}>

@@ -2,6 +2,7 @@ import "./styles.css";
 import React from "react";
 import Data from "./Data";
 import Filter from "./Filter";
+import DetailsPage from "./Details-page";
 
 export default function App() {
   const [selectedCity, setSelectedCity] = React.useState("");
@@ -10,6 +11,8 @@ export default function App() {
     ""
   );
   const [search, setSearch] = React.useState("");
+  const [clickedWarehouseData, setClickedWarehouseData] = React.useState();
+  const [editPage, setEditPage] = React.useState(false);
 
   let filteredData = [...Data];
   if (selectedCity) {
@@ -31,16 +34,23 @@ export default function App() {
     );
   }
 
-  // console.log(filteredData);
-  function RenderData() {
+  const HandleEditPge = (data) => {
+    setClickedWarehouseData(data);
+    setEditPage(true);
+  };
+
+  // console.log(clickedWarehouseData);
+  const RenderData = (e) => {
     return (
       <div>
         {filteredData.map((data) => (
-          <p key={data.id}>{data.name}</p>
+          <p key={data.id} onClick={() => HandleEditPge(data)}>
+            {data.name}
+          </p>
         ))}
       </div>
     );
-  }
+  };
 
   return (
     <div className="App">
@@ -61,7 +71,14 @@ export default function App() {
         setSelectedCluster={setSelectedCluster}
         setSelectedSpaceAvailable={setSelectedSpaceAvailable}
       />
-      {filteredData ? <RenderData /> : <p>empty</p>}
+      {editPage ? (
+        <DetailsPage
+          clickedWarehouseData={clickedWarehouseData}
+          setEditPage={setEditPage}
+        />
+      ) : (
+        filteredData && <RenderData />
+      )}
     </div>
   );
 }
