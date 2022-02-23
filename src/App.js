@@ -11,10 +11,22 @@ export default function App() {
     ""
   );
   const [search, setSearch] = React.useState("");
-  const [clickedWarehouseData, setClickedWarehouseData] = React.useState();
+  const [clickedWarehouseIndex, setClickedWarehouseIndex] = React.useState();
   const [editPage, setEditPage] = React.useState(false);
+  const [data, setData] = React.useState([]);
 
-  let filteredData = [...Data];
+  React.useEffect(() => {
+    setData(Data);
+  }, []);
+
+  let filteredData = [...data];
+  const updateWareHouseAtIndex = (editedDetails, index) => {
+    setData((prevData) => {
+      prevData[index] = editedDetails;
+      return prevData;
+    });
+  };
+
   if (selectedCity) {
     filteredData = filteredData.filter((data) => data.city === selectedCity);
   }
@@ -34,17 +46,22 @@ export default function App() {
     );
   }
 
-  const HandleEditPge = (data) => {
-    setClickedWarehouseData(data);
+  const HandleEditPge = (index) => {
+    setClickedWarehouseIndex(index);
     setEditPage(true);
   };
 
-  // console.log(clickedWarehouseData);
   const RenderData = (e) => {
     return (
       <div>
-        {filteredData.map((data) => (
-          <p key={data.id} onClick={() => HandleEditPge(data)}>
+        {filteredData.map((data, index) => (
+          <p
+            key={data.id}
+            onClick={(e) => {
+              e.preventDefault();
+              HandleEditPge(index);
+            }}
+          >
             {data.name}
           </p>
         ))}
@@ -73,8 +90,10 @@ export default function App() {
       />
       {editPage ? (
         <DetailsPage
-          clickedWarehouseData={clickedWarehouseData}
+          index={clickedWarehouseIndex}
+          clickedWarehouseData={data[clickedWarehouseIndex]}
           setEditPage={setEditPage}
+          updateWareHouseAtIndex={updateWareHouseAtIndex}
         />
       ) : (
         filteredData && <RenderData />
