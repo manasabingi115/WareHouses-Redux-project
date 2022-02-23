@@ -31,7 +31,6 @@ export default function DetailsPage({
     e.preventDefault();
     setEditedDetails({ ...editedDetails, is_live: e.target.value });
   };
-  console.log(editedDetails);
   const onSubmit = (e) => {
     e.preventDefault();
     setEditPage(false);

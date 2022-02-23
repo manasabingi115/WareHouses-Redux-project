@@ -14,6 +14,7 @@ export default function App() {
   const [clickedWarehouseIndex, setClickedWarehouseIndex] = React.useState();
   const [editPage, setEditPage] = React.useState(false);
   const [data, setData] = React.useState([]);
+  const [allButton, setAllButton] = React.useState(true);
 
   React.useEffect(() => {
     setData(Data);
@@ -54,12 +55,12 @@ export default function App() {
   const RenderData = (e) => {
     return (
       <div>
-        {filteredData.map((data, index) => (
+        {(allButton ? data : filteredData).map((data, index) => (
           <p
             key={data.id}
             onClick={(e) => {
               e.preventDefault();
-              HandleEditPge(index);
+              HandleEditPge(data.id);
             }}
           >
             {data.name}
@@ -87,11 +88,12 @@ export default function App() {
         setSelectedCity={setSelectedCity}
         setSelectedCluster={setSelectedCluster}
         setSelectedSpaceAvailable={setSelectedSpaceAvailable}
+        setAllButton={setAllButton}
       />
       {editPage ? (
         <DetailsPage
-          index={clickedWarehouseIndex}
-          clickedWarehouseData={data[clickedWarehouseIndex]}
+          index={clickedWarehouseIndex - 1}
+          clickedWarehouseData={data[clickedWarehouseIndex - 1]}
           setEditPage={setEditPage}
           updateWareHouseAtIndex={updateWareHouseAtIndex}
         />
