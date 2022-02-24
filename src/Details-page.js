@@ -40,31 +40,54 @@ export default function DetailsPage({
   return (
     <div className="details-container">
       <form onSubmit={onSubmit}>
-        <label>Name: </label>
-        <input
-          className="edit-input"
-          onChange={HandleChangeName}
-          value={editedDetails.name}
-        ></input>
+        <div className="details-input-parent">
+          <label>Name: </label>
+          <input
+            className="details-input"
+            onChange={HandleChangeName}
+            value={editedDetails.name}
+          ></input>
+        </div>
         <br />
-        <label>City: </label>
-        <input onChange={HandleChangeCity} value={editedDetails.city}></input>
+        <div className="details-input-parent">
+          <label>City: </label>
+          <input
+            className="details-input"
+            onChange={HandleChangeCity}
+            value={editedDetails.city}
+          ></input>
+        </div>
         <br />
-        <label>Cluster: </label>
-        <input
-          onChange={HandleChangeCluster}
-          value={editedDetails.cluster}
-        ></input>
+        <div className="details-input-parent">
+          <label>Cluster: </label>
+          <input
+            className="details-input"
+            onChange={HandleChangeCluster}
+            value={editedDetails.cluster}
+          ></input>
+        </div>
         <br />
-        <label>Live status: </label>
-        <input
-          onChange={HandleChangeLiveStatus}
-          value={editedDetails.is_live}
-        ></input>
+        <div className="details-input-parent">
+          <label>Live status: </label>
+          <input
+            className="details-input"
+            onChange={HandleChangeLiveStatus}
+            value={editedDetails.is_live}
+          ></input>
+        </div>
         <br />
         <br />
-        <button type="submit">Submit</button>
-        <button onClick={() => setEditPage(false)}>Cancel</button>
+        <div className="details-page-buttons">
+          <button className="details-page-button a" type="submit">
+            Save
+          </button>
+          <button
+            className="details-page-button b"
+            onClick={() => setEditPage(false)}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
