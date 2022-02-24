@@ -1,104 +1,32 @@
 import "./styles.css";
 import React from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Data from "./Data";
-import Filter from "./Filter";
+import WarehouseList from "./WarehouseList";
 import DetailsPage from "./Details-page";
+import { useSelector, useDispatch } from "react-redux";
+import { setData } from "./actions";
 
 export default function App() {
-  const [selectedCity, setSelectedCity] = React.useState("");
-  const [selectedCluster, setSelectedCluster] = React.useState("");
-  const [selectedSpaceAvailable, setSelectedSpaceAvailable] = React.useState(
-    ""
-  );
-  const [search, setSearch] = React.useState("");
-  const [clickedWarehouseIndex, setClickedWarehouseIndex] = React.useState();
-  const [editPage, setEditPage] = React.useState(false);
-  const [data, setData] = React.useState([]);
-
+  const showEditModal = useSelector((state) => state.filters.showEditModal);
+  const dispatch = useDispatch();
+  console.log({ showEditModal });
   React.useEffect(() => {
-    setData(Data);
+    dispatch(setData(Data));
   }, []);
 
-  let filteredData = [...data];
-  const updateWareHouseAtIndex = (editedDetails, index) => {
-    setData((prevData) => {
-      prevData[index] = editedDetails;
-      return prevData;
-    });
-  };
-
-  if (selectedCity) {
-    filteredData = filteredData.filter((data) => data.city === selectedCity);
-  }
-  if (selectedCluster) {
-    filteredData = filteredData.filter(
-      (data) => data.cluster === selectedCluster
-    );
-  }
-  if (selectedSpaceAvailable) {
-    filteredData = filteredData.filter(
-      (data) => data.space_available == selectedSpaceAvailable
-    );
-  }
-  if (search) {
-    filteredData = filteredData.filter((data) =>
-      data.name.toLowerCase().includes(search.toLowerCase())
-    );
-  }
-
-  const HandleEditPge = (index) => {
-    setClickedWarehouseIndex(index);
-    setEditPage(true);
-  };
-
-  const RenderData = (e) => {
-    return (
-      <div>
-        {filteredData.map((data, index) => (
-          <p
-            className="house-name"
-            key={data.id}
-            onClick={(e) => {
-              e.preventDefault();
-              HandleEditPge(data.id);
-            }}
-          >
-            {data.name}
-          </p>
-        ))}
-      </div>
-    );
-  };
-
   return (
-    <div className="App">
-      <h1>Warehouses</h1>
-      <br />
-      <div className="field">
-        <div className="control">
-          <input
-            className="input"
-            type="search"
-            placeholder="Search City"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+    <BrowserRouter>
+      <div className="App">
+        <Link to="/">
+          <h1>Warehouses</h1>
+        </Link>
+        <br />
+        <Routes>
+          <Route exact path="/" element={<WarehouseList />} />
+          <Route exact path="/details/:index" element={<DetailsPage />} />
+        </Routes>
       </div>
-      <Filter
-        setSelectedCity={setSelectedCity}
-        setSelectedCluster={setSelectedCluster}
-        setSelectedSpaceAvailable={setSelectedSpaceAvailable}
-      />
-      {editPage ? (
-        <DetailsPage
-          index={clickedWarehouseIndex - 1}
-          clickedWarehouseData={data[clickedWarehouseIndex - 1]}
-          setEditPage={setEditPage}
-          updateWareHouseAtIndex={updateWareHouseAtIndex}
-        />
-      ) : (
-        filteredData && <RenderData />
-      )}
-    </div>
+    </BrowserRouter>
   );
 }

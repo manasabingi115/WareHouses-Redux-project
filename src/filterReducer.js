@@ -1,0 +1,48 @@
+const filtereReducerIntialState = {
+  selectedCity: "",
+  selectedCluster: "",
+  selectedSpaceAvailable: "",
+  clickedWarehouseIndex: null,
+  showEditModal: false,
+  searchText: ""
+};
+
+const filtereReducer = (state = filtereReducerIntialState, action) => {
+  switch (action.type) {
+    case "SET_SELECTED_CITY":
+      return {
+        ...state,
+        selectedCity: action.payload
+      };
+    case "SET_SELECTED_CLUSTER":
+      return {
+        ...state,
+        selectedCluster: action.payload
+      };
+    case "SET_SELECTED_SPACE_AVAILABLE":
+      return {
+        ...state,
+        selectedSpaceAvailable: parseInt(action.payload)
+      };
+    case "SET_CLICKED_WAREHOUSE_INDEX":
+      return {
+        ...state,
+        clickedWarehouseIndex: action.payload
+      };
+    case "SET_EDIT_MODAL":
+      return {
+        ...state,
+        showEditModal: action.payload
+      };
+    case "SET_SEARCH_TEXT":
+      return {
+        ...state,
+        searchText: action.payload
+      };
+    //
+    default:
+      return state;
+  }
+};
+
+export default filtereReducer;
