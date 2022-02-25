@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom"; // version 5.2.0
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { updateWareHouseAtIndex } from "./actions";
 
 const initialDetails = {
