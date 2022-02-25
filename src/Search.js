@@ -1,5 +1,4 @@
 import React from "react";
-import data from "./WarehouseList";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setSearchText } from "./actions";

@@ -49,13 +49,6 @@ export const setClickedWarehouseIndex = (index) => {
   };
 };
 
-export const showEditModal = (value) => {
-  return {
-    type: "SET_EDIT_MODAL",
-    payload: value
-  };
-};
-
 export const setSearchText = (value) => {
   return {
     type: "SET_SEARCH_TEXT",

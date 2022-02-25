@@ -3,7 +3,6 @@ const filtereReducerIntialState = {
   selectedCluster: "",
   selectedSpaceAvailable: "",
   clickedWarehouseIndex: null,
-  showEditModal: false,
   searchText: ""
 };
 
@@ -29,17 +28,13 @@ const filtereReducer = (state = filtereReducerIntialState, action) => {
         ...state,
         clickedWarehouseIndex: action.payload
       };
-    case "SET_EDIT_MODAL":
-      return {
-        ...state,
-        showEditModal: action.payload
-      };
+
     case "SET_SEARCH_TEXT":
       return {
         ...state,
         searchText: action.payload
       };
-    //
+
     default:
       return state;
   }

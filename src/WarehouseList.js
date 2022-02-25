@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { showEditModal, setClickedWarehouseIndex } from "./actions";
+import { setClickedWarehouseIndex } from "./actions";
 import { Link } from "react-router-dom";
 import Filter from "./Filter";
 import Search from "./Search";
@@ -17,7 +17,6 @@ const WarehouseList = (e) => {
     searchText
   } = filters;
   let filteredData = [...data];
-  console.log(1, filteredData);
 
   if (selectedCity) {
     filteredData = filteredData.filter((data) => data.city === selectedCity);
@@ -41,9 +40,7 @@ const WarehouseList = (e) => {
 
   const HandleEditPge = (index) => {
     dispatch(setClickedWarehouseIndex(index));
-    dispatch(showEditModal(true));
   };
-  console.log(2, filteredData);
 
   return (
     <div>

@@ -1,7 +1,6 @@
 const warehouseIntialState = [];
 
 const warehouseReducer = (state = warehouseIntialState, action) => {
-  console.log({ action });
   switch (action.type) {
     case "SET_DATA":
       return action.payload;

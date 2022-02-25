@@ -4,13 +4,11 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Data from "./Data";
 import WarehouseList from "./WarehouseList";
 import DetailsPage from "./Details-page";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setData } from "./actions";
 
 export default function App() {
-  const showEditModal = useSelector((state) => state.filters.showEditModal);
   const dispatch = useDispatch();
-  console.log({ showEditModal });
   React.useEffect(() => {
     dispatch(setData(Data));
   }, []);

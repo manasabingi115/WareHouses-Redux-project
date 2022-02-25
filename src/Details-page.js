@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom"; // version 5.2.0
-import { updateWareHouseAtIndex, showEditModal } from "./actions";
+import { updateWareHouseAtIndex } from "./actions";
 
 const initialDetails = {
   id: "",
@@ -28,7 +28,6 @@ export default function DetailsPage() {
       is_live: data?.is_live
     });
   }, []);
-  console.log({ data });
   if (!data?.id) {
     navigate("/");
     return "";
@@ -42,7 +41,6 @@ export default function DetailsPage() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(showEditModal(false));
     dispatch(updateWareHouseAtIndex(editedDetails, index));
     navigate("/");
   };
@@ -50,9 +48,9 @@ export default function DetailsPage() {
   const getInputField = (value, name) => {
     return (
       <div className="details-input-parent" key={name}>
-        <div class="field">
-          <label class="label">{name}</label>
-          <div class="control">
+        <div className="field">
+          <label className="label">{name}</label>
+          <div className="control">
             <input
               className="input"
               onChange={handleChange}
