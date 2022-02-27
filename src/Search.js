@@ -12,7 +12,7 @@ const Search = () => {
         <input
           className="input"
           type="search"
-          placeholder="Search City"
+          placeholder="Search WareHouse..."
           value={searchText}
           onChange={(e) => dispatch(setSearchText(e.target.value))}
         />
